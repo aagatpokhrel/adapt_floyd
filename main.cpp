@@ -6,7 +6,7 @@
 using namespace std;
 
 typedef long long ll;
-const ll INF = 1e16; // Use a safe INF to avoid overflow
+const ll INF = 1e16;
 
 typedef vector<vector<ll>> Matrix;
 
@@ -83,7 +83,7 @@ int main()
             L[u][v] = max(L[u][v], (ll)weight[i]);
         }
 
-        // Part 1: Floyd-Warshall
+        // minimum path
         for (int k = 0; k < N; ++k)
         {
             for (int i = 0; i < N; ++i)
@@ -101,7 +101,6 @@ int main()
             continue;
         }
 
-        // Part 2: One charge matrix A
         Matrix A(N, vector<ll>(N, INF));
         for (int f = 0; f < N; ++f)
         {
@@ -120,7 +119,7 @@ int main()
             }
         }
 
-        // Allow for using 0 charges within the exponentiation step
+        // assign minimum
         for (int i = 0; i < N; ++i)
         {
             for (int j = 0; j < N; ++j)
@@ -129,7 +128,7 @@ int main()
             }
         }
 
-        // Part 3: Matrix Power
+        // power the matrix A for minimum path
         Matrix finalA = power(A, charges, N);
         cout << finalA[0][N - 1] << endl;
     }
